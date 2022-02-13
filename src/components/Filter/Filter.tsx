@@ -1,6 +1,5 @@
 import React from "react";
 import "./Filter.css";
-import { useState, useEffect } from "react";
 
 interface FilterProps {
   handleFilterClick: handleFilterClick;

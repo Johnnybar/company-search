@@ -1,58 +1,54 @@
 import React from "react";
 import "./App.css";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import Filter from "../Filter/Filter";
 import Input from "../Input/Input";
-import axios from "axios";
 import SearchResult from "../SearchResult/SearchResult";
+import {
+  getResultsBasedOnInput,
+  getResultsBasedOnFilters,
+  checkIfFiltersExistReturnResults,
+  getFiltersRemoveDuplicates,
+} from "../../utils";
 
 function App() {
-  interface Company {
-    company_name: string;
-    logo: string;
-    city: number;
-    specialty: string;
-  }
-  const [allCompaniesData, setAllCompaniesData] = useState<any[]>([]);
-  const [querySearchResults, setQuerySearchResults] = useState<any[]>([]);
-  const [filteredSearchResults, setFilteredSearchResults] = useState<any[]>([]);
-  const [filters, setFilters] = useState<any[]>([]);
-  let [selectedFilters, setSelectedFilters] = useState<any[]>([]);
+  const [allCompaniesData, setAllCompaniesData] = useState<Company[]>([]);
+  const [querySearchResults, setQuerySearchResults] = useState<Company[]>([]);
+  const [filteredSearchResults, setFilteredSearchResults] = useState<Company[]>(
+    []
+  );
+  const [filters, setFilters] = useState<string[]>([]);
+  let [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [error, setError] = useState<Optional<string>>(null);
 
-  const handleSearch = (event: any) => {
-    let { value } = event.target;
-    value = value.toLowerCase();
-    const queryResult = allCompaniesData.filter((item) => {
-      return value !== ""
-        ? item.company_name.toLowerCase().search(value) !== -1
-        : "";
-    });
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let value = event.target.value.toLowerCase();
+    const queryResult: Company[] = getResultsBasedOnInput(
+      allCompaniesData,
+      value
+    );
     setQuerySearchResults(queryResult);
-    let filteredResult: any = [];
+    let filteredResult: Company[] = [];
     if (selectedFilters.length) {
-      filteredResult = queryResult.filter((item) => {
-        return selectedFilters.includes(item.specialty);
-      });
+      filteredResult = getResultsBasedOnFilters(queryResult, selectedFilters);
     }
     setFilteredSearchResults(
       filteredResult.length ? filteredResult : queryResult
     );
   };
 
-  const handleFilterClick = (event: any) => {
+  const handleFilterClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
     checked
       ? (selectedFilters = [...selectedFilters, name])
       : selectedFilters.splice(selectedFilters.indexOf(name), 1);
-
     setSelectedFilters(selectedFilters);
 
-    const filteredResults = selectedFilters.length
-      ? querySearchResults.filter((result) =>
-          selectedFilters.includes(result.specialty)
-        )
-      : querySearchResults;
-    console.log(filteredResults, "filtered results");
+    const filteredResults = checkIfFiltersExistReturnResults(
+      selectedFilters,
+      querySearchResults
+    );
 
     setFilteredSearchResults(filteredResults);
   };
@@ -62,12 +58,10 @@ function App() {
       try {
         const { data } = await axios.get(`MOCK_DATA.json`);
         setAllCompaniesData(data);
-        const specialties = Array.from(
-          new Set(data.map((company: Company) => company.specialty))
-        );
-
-        setFilters(specialties);
+        const specialtiesFilters = getFiltersRemoveDuplicates(data);
+        setFilters(specialtiesFilters);
       } catch (error) {
+        setError(error as string);
         console.error(error);
       }
     };
@@ -79,8 +73,12 @@ function App() {
     <div className="App">
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {filters &&
-          filters.map((filter) => (
-            <Filter handleFilterClick={handleFilterClick} filter={filter} />
+          filters.map((filter, i) => (
+            <Filter
+              key={i}
+              handleFilterClick={handleFilterClick}
+              filter={filter}
+            />
           ))}
       </div>
       <div className="search">
@@ -89,13 +87,14 @@ function App() {
       <div className="results">
         {filteredSearchResults.length > 0 &&
           filteredSearchResults.map((searchResult: Company, i: number) => (
-            <ul>
+            <ul key={i}>
               <li>
                 <SearchResult searchResult={searchResult} i={i} />
               </li>
             </ul>
           ))}
       </div>
+      {error && <div>The following error has occurred: {error}</div>}
     </div>
   );
 }

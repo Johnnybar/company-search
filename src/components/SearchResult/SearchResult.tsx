@@ -1,5 +1,5 @@
 import React from "react";
-import "./SearchResult.css";
+import "./SearchResult.scss";
 
 type SearchResultProps = {
   searchResult: Company;

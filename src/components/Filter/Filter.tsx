@@ -1,5 +1,5 @@
 import React from "react";
-import "./Filter.css";
+import "./Filter.scss";
 
 interface FilterProps {
   handleFilterClick: handleFilterClick;

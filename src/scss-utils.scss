@@ -1,0 +1,13 @@
+//color variables
+
+$cosuno-blue: #336fca;
+$cosuno-white: white;
+$cosuno-white-transparent: rgba(255, 255, 255, 0.14);
+$cosuno-black: black;
+
+//functions
+
+@function toRem($value) {
+  $remValue: calc($value / 16) + rem;
+  @return $remValue;
+}

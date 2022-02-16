@@ -10,8 +10,7 @@ import Footer from "../Footer/Footer";
 
 import {
   getResultsBasedOnInput,
-  getResultsBasedOnFilters,
-  checkIfFiltersExistReturnResults,
+  checkForFiltersReturnResults,
   getFiltersRemoveDuplicates,
   createFiltersSelectOptions,
 } from "../../utils";
@@ -19,15 +18,15 @@ import {
 function App() {
   const [allCompaniesData, setAllCompaniesData] = useState<Company[]>([]);
   const [querySearchResults, setQuerySearchResults] = useState<Company[]>([]);
-  const [filteredSearchResults, setFilteredSearchResults] = useState<Company[]>(
-    []
-  );
-  const [filterSelectOptions, setFilterSelectOptions] = useState<
-    SelectOptionProps[]
-  >([]);
+  //finalSearchResults refers to results received following search and possible filters added
+  const [finalSearchResults, setFinalSearchResults] = useState<Company[]>([]);
   const [filters, setFilters] = useState<string[]>([]);
   let [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [error, setError] = useState<Optional<string>>(null);
+  //this stateful value (filterSelectOptions) is only meant to create React-Select's options prop
+  const [filterSelectOptions, setFilterSelectOptions] = useState<
+    SelectOptionProps[]
+  >([]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = event.target.value.toLowerCase();
@@ -37,23 +36,23 @@ function App() {
     );
     setQuerySearchResults(queryResult);
     let filteredResult: Company[] = [];
-    if (selectedFilters.length) {
-      filteredResult = getResultsBasedOnFilters(queryResult, selectedFilters);
-      setFilteredSearchResults(filteredResult);
-    } else {
-      setFilteredSearchResults(queryResult);
-    }
+    //set final results based on either filters+query or only query if no filters were selected
+    filteredResult = checkForFiltersReturnResults(selectedFilters, queryResult);
+    setFinalSearchResults(filteredResult);
   };
 
   const handleFilterClick = (selectedFilters: any) => {
-    const onlyFilters = selectedFilters.map((item: any) => item.value);
-    setSelectedFilters(onlyFilters);
-    const filteredResults = checkIfFiltersExistReturnResults(
-      onlyFilters,
+    const remainingSelectedFilters = selectedFilters.map(
+      (item: SelectOptionProps) => item.value
+    );
+    setSelectedFilters(remainingSelectedFilters);
+    //set final results based on either filters+query or only query if no filters were selected
+    const filteredResults = checkForFiltersReturnResults(
+      remainingSelectedFilters,
       querySearchResults
     );
 
-    setFilteredSearchResults(filteredResults);
+    setFinalSearchResults(filteredResults);
   };
 
   useEffect(() => {
@@ -61,9 +60,9 @@ function App() {
       try {
         const { data } = await axios.get(`MOCK_DATA.json`);
         setAllCompaniesData(data);
+        //create all specialties filters
         const specialtiesFilters = getFiltersRemoveDuplicates(data);
-        // const specialtiesSelectOptions =
-        //   createFiltersSelectOptions(specialtiesFilters);
+        //create React-Select's options prop using specialties filters
         setFilterSelectOptions(createFiltersSelectOptions(specialtiesFilters));
         setFilters(specialtiesFilters);
       } catch (error) {
@@ -76,26 +75,22 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="cosuno-app">
       <Header />
       <div className="cosuno-content-wrapper container">
-        <div className="cosuno-search-field__wrapper row">
-          <div className="col-6">
-            <Input handleSearch={handleSearch} />
-          </div>
-          <div className="col-6">
-            {filters && (
-              <Filters
-                handleFilterClick={handleFilterClick}
-                filterSelectOptions={filterSelectOptions}
-              />
-            )}
-          </div>
+        <div className="cosuno-search-field__wrapper">
+          <Input handleSearch={handleSearch} />
+          {filters && (
+            <Filters
+              handleFilterClick={handleFilterClick}
+              filterSelectOptions={filterSelectOptions}
+            />
+          )}
         </div>
         <div className="cusono-search-results container">
           <ul className="cusono-search-results__results-list row">
-            {filteredSearchResults.length > 0 &&
-              filteredSearchResults.map((searchResult: Company, i: number) => (
+            {finalSearchResults.length > 0 &&
+              finalSearchResults.map((searchResult: Company, i: number) => (
                 <SearchResult searchResult={searchResult} i={i} />
               ))}
           </ul>

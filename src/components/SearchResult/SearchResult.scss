@@ -1,11 +1,22 @@
 @import "../../scss-utils.scss";
 
-img {
-  width: 100px;
-  height: 100px;
-  border: 1px solid $cosuno-blue;
-}
-
 li {
   list-style-type: none;
+}
+
+.cosuno-search-result {
+  color: $cosuno-blue;
+
+  &__image {
+    width: toRem(100);
+    height: toRem(100);
+  }
+
+  &__image,
+  &__title,
+  &__specialty,
+  &__logo,
+  &__city {
+    padding: toRem(8) 0 toRem(8) 0;
+  }
 }

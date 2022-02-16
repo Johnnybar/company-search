@@ -7,20 +7,26 @@ type SearchResultProps = {
 };
 function SearchResult({ searchResult, i }: SearchResultProps) {
   return (
-    <li className="cusono-search-results__result col-3" key={i}>
+    <li
+      className="cosuno-search-result col-3"
+      id="cosuno-search-result"
+      key={i}
+    >
       <img
-        className="cosuno-search-result__result-image"
+        className="cosuno-search-result__image"
         src={searchResult.logo}
         alt={searchResult.company_name}
       />
-      <h1 className="cosuno-search-result__result-title">
+      <h3 className="cosuno-search-result__title">
         {searchResult.company_name}
-      </h1>
-      <p className="cosuno-search-result__result-specialty">
-        specialty: {searchResult.specialty}
+      </h3>
+      <p className="cosuno-search-result__specialty">
+        <strong>Specialty: </strong>
+        {searchResult.specialty}
       </p>
-      <p className="cosuno-search-result__result-city">
-        city: {searchResult.city}
+      <p className="cosuno-search-result__city">
+        <strong>City: </strong>
+        {searchResult.city}
       </p>
     </li>
   );

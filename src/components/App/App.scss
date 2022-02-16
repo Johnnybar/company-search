@@ -1,43 +1,39 @@
 @import "../../scss-utils.scss";
 
-//header
-.cosuno-header {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  width: 100%;
-  height: toRem(110);
-  background: $cosuno-black;
-  color: $cosuno-white;
-  display: flex;
-  box-shadow: toRem(1) toRem(1) toRem(15) toRem(1) $cosuno-white-transparent;
-
-  &__heading {
-    margin-top: toRem(33);
-  }
-
-  &__logo {
-    margin: toRem(10);
-    max-width: toRem(200);
-    height: auto;
-  }
+.cosuno-app {
+  background-color: $cosuno-grey;
 }
 
 .cosuno-content-wrapper {
-  padding: toRem(150) 0 toRem(30) 0;
-  background-color: $cosuno-black;
+  padding: toRem(50) 0 toRem(30) 0;
+  background-color: $cosuno-grey;
   color: $cosuno-white;
   width: 100%;
   min-height: 95vh;
 }
 
-.cosuno-footer {
-  background-color: $cosuno-black;
-  &__text {
-    font-size: toRem(16);
-    font-weight: bold;
-    color: $cosuno-white;
-    margin: 0;
-    height: 5vh;
+.cosuno-search-field {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: toRem(50);
+
+    @media only screen and (max-device-width: 407px) {
+      justify-content: center;
+    }
+  }
+}
+
+.cusono-search-results {
+  &__results-list {
+    padding: 0;
+    & li:nth-child(2n) {
+      background-color: $cosuno-light-blue;
+    }
+  }
+  &__result {
+    overflow: auto;
+    word-break: break-word;
   }
 }

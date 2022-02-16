@@ -1,1 +1,11 @@
 @import "../../scss-utils.scss";
+.cosuno-footer {
+  background-color: $cosuno-blue;
+  &__text {
+    font-size: toRem(16);
+    font-weight: bold;
+    color: $cosuno-white;
+    margin: 0;
+    height: 5vh;
+  }
+}

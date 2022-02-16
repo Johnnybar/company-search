@@ -11,16 +11,13 @@ const customStyles = {
   option: (styles: any, { isDisabled }: any) => {
     return {
       ...styles,
-      backgroundColor: isDisabled ? "red" : "green",
-      color: "#FFF",
+      backgroundColor: isDisabled ? "#ebf1f8" : "#2451b2",
+      color: "white",
       cursor: isDisabled ? "not-allowed" : "default",
     };
   },
 };
-interface FilterProps {
-  handleFilterClick: handleFilterClick;
-  filterSelectOptions: SelectOptionProps[];
-}
+
 function Filter({ handleFilterClick, filterSelectOptions }: FilterProps) {
   return (
     <Select
@@ -28,6 +25,7 @@ function Filter({ handleFilterClick, filterSelectOptions }: FilterProps) {
       name="Specialty"
       styles={customStyles}
       options={filterSelectOptions}
+      placeholder="Filter by specialties"
       className="basic-multi-select"
       classNamePrefix="select"
       onChange={(selectedFilters) => {

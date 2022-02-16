@@ -5,6 +5,16 @@ interface Company {
   specialty: string;
 }
 
+interface SelectOptionProps {
+  value: string;
+  label: string;
+}
+
+interface FilterProps {
+  handleFilterClick: handleFilterClick;
+  filterSelectOptions: SelectOptionProps[];
+}
+
 type Optional<T> = T | null;
 
 type handleFilterClick = (event: any) => void;

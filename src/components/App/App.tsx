@@ -2,14 +2,18 @@ import React from "react";
 import "./App.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Filter from "../Filter/Filter";
+import Filters from "../Filters/Filters";
 import Input from "../Input/Input";
 import SearchResult from "../SearchResult/SearchResult";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+
 import {
   getResultsBasedOnInput,
   getResultsBasedOnFilters,
   checkIfFiltersExistReturnResults,
   getFiltersRemoveDuplicates,
+  createFiltersSelectOptions,
 } from "../../utils";
 
 function App() {
@@ -18,6 +22,9 @@ function App() {
   const [filteredSearchResults, setFilteredSearchResults] = useState<Company[]>(
     []
   );
+  const [filterSelectOptions, setFilterSelectOptions] = useState<
+    SelectOptionProps[]
+  >([]);
   const [filters, setFilters] = useState<string[]>([]);
   let [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [error, setError] = useState<Optional<string>>(null);
@@ -32,21 +39,17 @@ function App() {
     let filteredResult: Company[] = [];
     if (selectedFilters.length) {
       filteredResult = getResultsBasedOnFilters(queryResult, selectedFilters);
+      setFilteredSearchResults(filteredResult);
+    } else {
+      setFilteredSearchResults(queryResult);
     }
-    setFilteredSearchResults(
-      filteredResult.length ? filteredResult : queryResult
-    );
   };
 
-  const handleFilterClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = event.target;
-    checked
-      ? (selectedFilters = [...selectedFilters, name])
-      : selectedFilters.splice(selectedFilters.indexOf(name), 1);
-    setSelectedFilters(selectedFilters);
-
+  const handleFilterClick = (selectedFilters: any) => {
+    const onlyFilters = selectedFilters.map((item: any) => item.value);
+    setSelectedFilters(onlyFilters);
     const filteredResults = checkIfFiltersExistReturnResults(
-      selectedFilters,
+      onlyFilters,
       querySearchResults
     );
 
@@ -59,6 +62,9 @@ function App() {
         const { data } = await axios.get(`MOCK_DATA.json`);
         setAllCompaniesData(data);
         const specialtiesFilters = getFiltersRemoveDuplicates(data);
+        // const specialtiesSelectOptions =
+        //   createFiltersSelectOptions(specialtiesFilters);
+        setFilterSelectOptions(createFiltersSelectOptions(specialtiesFilters));
         setFilters(specialtiesFilters);
       } catch (error) {
         setError(error as string);
@@ -71,30 +77,38 @@ function App() {
 
   return (
     <div className="App">
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {filters &&
-          filters.map((filter, i) => (
-            <Filter
-              key={i}
-              handleFilterClick={handleFilterClick}
-              filter={filter}
-            />
-          ))}
-      </div>
-      <div className="search">
-        <Input handleSearch={handleSearch} />
-      </div>
-      <div className="results">
-        {filteredSearchResults.length > 0 &&
-          filteredSearchResults.map((searchResult: Company, i: number) => (
-            <ul key={i}>
-              <li>
+      <Header />
+      <div className="cosuno-content-wrapper container">
+        <div className="cosuno-search-field__wrapper row">
+          <div className="col-6">
+            <Input handleSearch={handleSearch} />
+          </div>
+          <div className="col-6">
+            {filters && (
+              <Filters
+                handleFilterClick={handleFilterClick}
+                filterSelectOptions={filterSelectOptions}
+              />
+            )}
+          </div>
+        </div>
+        <div className="cusono-search-results container">
+          <ul className="cusono-search-results__results-list row">
+            {filteredSearchResults.length > 0 &&
+              filteredSearchResults.map((searchResult: Company, i: number) => (
                 <SearchResult searchResult={searchResult} i={i} />
-              </li>
-            </ul>
-          ))}
+              ))}
+          </ul>
+        </div>
+        {error && (
+          <div className="cusono-error">
+            <p className="cusono-error_error-text">
+              The following error has occurred: {error}
+            </p>
+          </div>
+        )}
       </div>
-      {error && <div>The following error has occurred: {error}</div>}
+      <Footer />
     </div>
   );
 }

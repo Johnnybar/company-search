@@ -17,16 +17,7 @@ export const getResultsBasedOnInput = (
       : "";
   });
 
-export const getResultsBasedOnFilters = (
-  queryResult: Company[],
-  selectedFilters: string[]
-) => {
-  return queryResult.filter(({ specialty }) => {
-    return selectedFilters.includes(specialty);
-  });
-};
-
-export const checkIfFiltersExistReturnResults = (
+export const checkForFiltersReturnResults = (
   selectedFilters: string[],
   querySearchResults: Company[]
 ) => {

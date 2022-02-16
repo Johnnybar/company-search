@@ -1,1 +1,43 @@
 @import "../../scss-utils.scss";
+
+//header
+.cosuno-header {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+  height: toRem(110);
+  background: $cosuno-black;
+  color: $cosuno-white;
+  display: flex;
+  box-shadow: toRem(1) toRem(1) toRem(15) toRem(1) $cosuno-white-transparent;
+
+  &__heading {
+    margin-top: toRem(33);
+  }
+
+  &__logo {
+    margin: toRem(10);
+    max-width: toRem(200);
+    height: auto;
+  }
+}
+
+.cosuno-content-wrapper {
+  padding: toRem(150) 0 toRem(30) 0;
+  background-color: $cosuno-black;
+  color: $cosuno-white;
+  width: 100%;
+  min-height: 95vh;
+}
+
+.cosuno-footer {
+  background-color: $cosuno-black;
+  &__text {
+    font-size: toRem(16);
+    font-weight: bold;
+    color: $cosuno-white;
+    margin: 0;
+    height: 5vh;
+  }
+}

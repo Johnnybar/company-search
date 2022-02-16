@@ -2,6 +2,11 @@ export const getFiltersRemoveDuplicates = (data: Company[]) => {
   return Array.from(new Set(data.map(({ specialty }: Company) => specialty)));
 };
 
+export const createFiltersSelectOptions = (data: string[]) => {
+  return data.map((item) => {
+    return { value: item, label: item };
+  });
+};
 export const getResultsBasedOnInput = (
   allCompaniesData: Company[],
   value: string
@@ -17,7 +22,7 @@ export const getResultsBasedOnFilters = (
   selectedFilters: string[]
 ) => {
   return queryResult.filter(({ specialty }) => {
-    selectedFilters.includes(specialty);
+    return selectedFilters.includes(specialty);
   });
 };
 

@@ -91,7 +91,7 @@ function App() {
           <ul className="cusono-search-results__results-list row">
             {finalSearchResults.length > 0 &&
               finalSearchResults.map((searchResult: Company, i: number) => (
-                <SearchResult searchResult={searchResult} i={i} />
+                <SearchResult searchResult={searchResult} i={i} key={i} />
               ))}
           </ul>
         </div>

@@ -7,8 +7,8 @@ function Input({ handleSearch }: InputProps) {
   return (
     <input
       type="text"
-      placeholder={"Search "}
-      className={"input"}
+      placeholder="Search "
+      className="cosuno-input-field"
       onChange={handleSearch}
     />
   );

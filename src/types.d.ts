@@ -10,6 +10,11 @@ interface SelectOptionProps {
   label: string;
 }
 
+interface SearchResultProps {
+  searchResult: Company;
+  i: number;
+}
+
 interface FilterProps {
   handleFilterClick: handleFilterClick;
   filterSelectOptions: SelectOptionProps[];
@@ -28,12 +33,12 @@ type getResultsBasedOnInput = (
   value: string
 ) => Company[];
 
-type getResultsBasedOnFilters = (
-  queryResult: Company[],
-  selectedFilters: string[]
-) => Company[];
-
-type checkIfFiltersExistReturnResults = (
+type checkForFiltersReturnResults = (
   selectedFilters: string[],
   querySearchResults: Company[]
 ) => Company[];
+
+type createFiltersSelectOptions = (data: string[]) => {
+  value: string;
+  label: string;
+}[];

@@ -1,10 +1,6 @@
 import React from "react";
 import "./SearchResult.scss";
 
-type SearchResultProps = {
-  searchResult: Company;
-  i: number;
-};
 function SearchResult({ searchResult, i }: SearchResultProps) {
   return (
     <li

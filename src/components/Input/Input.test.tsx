@@ -26,6 +26,7 @@ describe("Input", () => {
     const inputPlaceholder = screen.getByTestId(/input/i);
     expect(inputPlaceholder).toBeInTheDocument();
   });
+
   test("Should display correct result when user enters search term", async () => {
     render(<Input handleSearch={mockHandleSearch} />, container);
     const inputElement = screen.queryByPlaceholderText(

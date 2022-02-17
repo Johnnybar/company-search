@@ -4,7 +4,7 @@ import "./SearchResult.scss";
 function SearchResult({ searchResult, i }: SearchResultProps) {
   return (
     <li
-      className="cosuno-search-result col-3"
+      className="cosuno-search-result col-sm-4 col-md-3"
       id="cosuno-search-result"
       key={i}
     >

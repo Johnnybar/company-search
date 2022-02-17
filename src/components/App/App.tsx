@@ -35,23 +35,27 @@ function App() {
       value
     );
     setQuerySearchResults(queryResult);
-    let filteredResult: Company[] = [];
+    let filteredResults: Company[];
     //set final results based on either filters+query or only query if no filters were selected
-    filteredResult = checkForFiltersReturnResults(selectedFilters, queryResult);
-    setFinalSearchResults(filteredResult);
+    filteredResults = checkForFiltersReturnResults(
+      selectedFilters,
+      queryResult
+    );
+    setFinalSearchResults(filteredResults);
   };
 
-  const handleFilterClick = (selectedFilters: any) => {
+  const handleFilterClick = (selectedFilters: SelectOptionProps[]) => {
     const remainingSelectedFilters = selectedFilters.map(
       (item: SelectOptionProps) => item.value
     );
     setSelectedFilters(remainingSelectedFilters);
+    let filteredResults: Company[];
+
     //set final results based on either filters+query or only query if no filters were selected
-    const filteredResults = checkForFiltersReturnResults(
+    filteredResults = checkForFiltersReturnResults(
       remainingSelectedFilters,
       querySearchResults
     );
-
     setFinalSearchResults(filteredResults);
   };
 
@@ -62,7 +66,9 @@ function App() {
         //create all specialties filters
         const specialtiesFilters = getFiltersRemoveDuplicates(data);
         //create React-Select's options prop using specialties filters
-        setFilterSelectOptions(createFiltersSelectOptions(specialtiesFilters));
+        const reactSelectFilterOptions =
+          createFiltersSelectOptions(specialtiesFilters);
+        setFilterSelectOptions(reactSelectFilterOptions);
         setFilters(specialtiesFilters);
       })
       .catch((error) => {

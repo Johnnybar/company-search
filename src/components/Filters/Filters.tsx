@@ -1,5 +1,4 @@
 import React from "react";
-import "./Filters.scss";
 import Select from "react-select";
 
 const customStyles = {
@@ -20,18 +19,20 @@ const customStyles = {
 
 function Filter({ handleFilterClick, filterSelectOptions }: FilterProps) {
   return (
-    <Select
-      isMulti
-      name="Specialty"
-      styles={customStyles}
-      options={filterSelectOptions}
-      placeholder="Filter by specialties"
-      className="basic-multi-select"
-      classNamePrefix="select"
-      onChange={(selectedFilters) => {
-        handleFilterClick(selectedFilters);
-      }}
-    />
+    <div className="cosuno-filters">
+      <Select
+        isMulti
+        name="Specialty"
+        styles={customStyles}
+        options={filterSelectOptions}
+        placeholder="Filter by specialties"
+        className="basic-multi-select"
+        classNamePrefix="select"
+        onChange={(selectedFilters) => {
+          handleFilterClick(selectedFilters);
+        }}
+      />
+    </div>
   );
 }
 

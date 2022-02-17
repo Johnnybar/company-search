@@ -17,7 +17,7 @@ const customStyles = {
   },
 };
 
-function Filter({ handleFilterClick, filterSelectOptions }: FilterProps) {
+function Filters({ handleFilterClick, filterSelectOptions }: FilterProps) {
   return (
     <div className="cosuno-filters">
       <Select
@@ -36,4 +36,4 @@ function Filter({ handleFilterClick, filterSelectOptions }: FilterProps) {
   );
 }
 
-export default Filter;
+export default Filters;

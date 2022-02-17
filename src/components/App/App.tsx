@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.scss";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Filters from "../Filters/Filters";
 import Input from "../Input/Input";
 import SearchResult from "../SearchResult/SearchResult";
@@ -13,6 +12,7 @@ import {
   checkForFiltersReturnResults,
   getFiltersRemoveDuplicates,
   createFiltersSelectOptions,
+  fetchData,
 } from "../../utils";
 
 function App() {
@@ -56,22 +56,19 @@ function App() {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`MOCK_DATA.json`);
+    fetchData()
+      .then((data) => {
         setAllCompaniesData(data);
         //create all specialties filters
         const specialtiesFilters = getFiltersRemoveDuplicates(data);
         //create React-Select's options prop using specialties filters
         setFilterSelectOptions(createFiltersSelectOptions(specialtiesFilters));
         setFilters(specialtiesFilters);
-      } catch (error) {
+      })
+      .catch((error) => {
         setError(error as string);
-        console.error(error);
-      }
-    };
-
-    fetchData();
+        console.log(error);
+      });
   }, []);
 
   return (

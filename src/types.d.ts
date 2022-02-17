@@ -1,7 +1,7 @@
 interface Company {
   company_name: string;
   logo: string;
-  city: number;
+  city: string;
   specialty: string;
 }
 
@@ -19,6 +19,8 @@ interface FilterProps {
   handleFilterClick: handleFilterClick;
   filterSelectOptions: SelectOptionProps[];
 }
+
+type fetchData = () => Promise<void>;
 
 type Optional<T> = T | null;
 

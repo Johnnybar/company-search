@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const getFiltersRemoveDuplicates = (data: Company[]) => {
   return Array.from(new Set(data.map(({ specialty }: Company) => specialty)));
 };
@@ -26,4 +28,13 @@ export const checkForFiltersReturnResults = (
         selectedFilters.includes(specialty)
       )
     : querySearchResults;
+};
+
+export const fetchData = async () => {
+  try {
+    const { data } = await axios.get(`MOCK_DATA.json`);
+    return data;
+  } catch (error) {
+    return error;
+  }
 };

@@ -1,9 +1,23 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import { unmountComponentAtNode } from "react-dom";
 import Header from "./Header";
 
-test("renders learn react link", () => {
-  // render(<SearchResult />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("Header", () => {
+  let container: any;
+  beforeEach(() => {
+    container = document.createElement("div");
+    document.body.appendChild(container);
+  });
+
+  afterEach(() => {
+    unmountComponentAtNode(container);
+    container.remove();
+    container = null;
+  });
+  test("renders header", () => {
+    render(<Header />);
+    const headerText = screen.getByText(/live company search/i);
+    expect(headerText).toBeInTheDocument();
+  });
 });

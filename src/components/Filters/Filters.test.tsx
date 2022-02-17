@@ -1,9 +1,32 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import Filtes from "./Filters";
+import { unmountComponentAtNode } from "react-dom";
+import Filters from "./Filters";
 
-test("renders learn react link", () => {
-  // render(<Filter />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+const mockFilterSelectOptions = [{ value: "Specialty", label: "Specialty" }];
+const mockHandleFilterClick = () => {
+  return;
+};
+
+describe("Filters", () => {
+  let container: any;
+  beforeEach(() => {
+    container = document.createElement("div");
+    document.body.appendChild(container);
+  });
+
+  afterEach(() => {
+    unmountComponentAtNode(container);
+    container.remove();
+    container = null;
+  });
+  test("renders react-select filter drop-down", () => {
+    render(
+      <Filters
+        handleFilterClick={mockHandleFilterClick}
+        filterSelectOptions={mockFilterSelectOptions}
+      />
+    );
+    const placeholderElement = screen.getByText(/Filter by specialties/i);
+    expect(placeholderElement).toBeInTheDocument();
+  });
 });

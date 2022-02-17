@@ -1,9 +1,23 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-// import Footer from "./Footer";
+import { unmountComponentAtNode } from "react-dom";
+import Footer from "./Footer";
 
-test("renders learn react link", () => {
-  // render(<SearchResult />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("Footer", () => {
+  let container: any;
+  beforeEach(() => {
+    container = document.createElement("div");
+    document.body.appendChild(container);
+  });
+
+  afterEach(() => {
+    unmountComponentAtNode(container);
+    container.remove();
+    container = null;
+  });
+  test("renders footer", () => {
+    render(<Footer />);
+    const footerText = screen.getByText(/Subcontractor management/i);
+    expect(footerText).toBeInTheDocument();
+  });
 });

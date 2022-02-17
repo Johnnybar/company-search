@@ -10,7 +10,7 @@ function Header() {
           <div className="cosuno-header__content-wrapper">
             <img src={logo} alt="cosuno logo" className="cosuno-header__logo" />
             <h3 className="cosuno-header__heading  text-center ">
-              Company live search and filter
+              Cosuno live company search and filter
             </h3>
           </div>
         </div>

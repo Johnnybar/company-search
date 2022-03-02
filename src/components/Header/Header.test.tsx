@@ -16,7 +16,7 @@ describe("Header", () => {
     container = null;
   });
   test("renders header", () => {
-    render(<Header />);
+    render(<Header />, container);
     const headerText = screen.getByText(/live company search/i);
     expect(headerText).toBeInTheDocument();
   });

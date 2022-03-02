@@ -16,7 +16,7 @@ describe("Footer", () => {
     container = null;
   });
   test("renders footer", () => {
-    render(<Footer />);
+    render(<Footer />, container);
     const footerText = screen.getByText(/Subcontractor management/i);
     expect(footerText).toBeInTheDocument();
   });

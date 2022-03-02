@@ -23,7 +23,7 @@ describe("Search Result", () => {
     container = null;
   });
   test("renders search result with provided mock input", () => {
-    render(<SearchResult searchResult={mockSearchResult} i={7} />);
+    render(<SearchResult searchResult={mockSearchResult} i={7} />, container);
     const searchResultText = screen.getByText(/Bailey/i);
     expect(searchResultText).toBeInTheDocument();
   });

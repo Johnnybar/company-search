@@ -24,7 +24,8 @@ describe("Filters", () => {
       <Filters
         handleFilterClick={mockHandleFilterClick}
         filterSelectOptions={mockFilterSelectOptions}
-      />
+      />,
+      container
     );
     const placeholderElement = screen.getByText(/Filter by specialties/i);
     expect(placeholderElement).toBeInTheDocument();

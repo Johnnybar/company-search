@@ -22,7 +22,7 @@ describe("Input", () => {
   });
 
   test("renders input", () => {
-    render(<Input handleSearch={mockHandleSearch} />);
+    render(<Input handleSearch={mockHandleSearch} />, container);
     const inputPlaceholder = screen.getByTestId(/input/i);
     expect(inputPlaceholder).toBeInTheDocument();
   });

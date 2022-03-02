@@ -16,6 +16,6 @@ describe("App", () => {
     container = null;
   });
   test("renders App", () => {
-    render(<App />);
+    render(<App />, container);
   });
 });

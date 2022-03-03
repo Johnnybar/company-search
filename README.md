@@ -1,4 +1,4 @@
-**Cosuno Live Company Search and Filter Application.**
+**Live Company Search and Filter Application.**
 
 Search for company information based on name and filter your results by company specialty using the drop-down menu.
 

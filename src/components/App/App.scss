@@ -1,18 +1,18 @@
 @import "../../scss-utils.scss";
 
-.cosuno-app {
-  background-color: $cosuno-grey;
+.company-search-app {
+  background-color: $company-search-grey;
 }
 
-.cosuno-content-wrapper {
+.company-search-content-wrapper {
   padding: toRem(50) 0 toRem(30) 0;
-  background-color: $cosuno-grey;
-  color: $cosuno-white;
+  background-color: $company-search-grey;
+  color: $company-search-white;
   width: 100%;
   min-height: 87vh;
 }
 
-.cosuno-search-field {
+.company-search-search-field {
   &__wrapper {
     display: flex;
     justify-content: space-between;
@@ -25,11 +25,11 @@
   }
 }
 
-.cusono-search-results {
+.comapny-search-search-results {
   &__results-list {
     padding: 0;
     & li:nth-child(2n) {
-      background-color: $cosuno-light-blue;
+      background-color: $company-search-light-blue;
     }
   }
 

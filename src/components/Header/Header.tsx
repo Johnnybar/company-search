@@ -4,13 +4,17 @@ import logo from "../../assets/cosuno-logo.svg";
 
 function Header() {
   return (
-    <header className="cosuno-header container">
+    <header className="company-search-header container">
       <div className="row">
         <div className="col-12">
-          <div className="cosuno-header__content-wrapper">
-            <img src={logo} alt="cosuno logo" className="cosuno-header__logo" />
-            <h3 className="cosuno-header__heading  text-center ">
-              Cosuno Live Company Search and Filter
+          <div className="company-search-header__content-wrapper">
+            <img
+              src={logo}
+              alt="company-search logo"
+              className="company-search-header__logo"
+            />
+            <h3 className="company-search-header__heading  text-center ">
+              Live Company Search and Filter
             </h3>
           </div>
         </div>

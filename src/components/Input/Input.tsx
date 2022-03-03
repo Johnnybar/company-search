@@ -9,7 +9,7 @@ function Input({ handleSearch }: InputProps) {
       type="text"
       data-testid="input"
       placeholder="Search for companies"
-      className="cosuno-input-field"
+      className="company-search-input-field"
       onChange={handleSearch}
     />
   );

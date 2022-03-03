@@ -19,7 +19,7 @@ const customStyles = {
 
 function Filters({ handleFilterClick, filterSelectOptions }: FilterProps) {
   return (
-    <div className="cosuno-filters">
+    <div className="company-search-filters">
       <Select
         isMulti
         name="Specialty"

@@ -4,23 +4,23 @@ import "./SearchResult.scss";
 function SearchResult({ searchResult, i }: SearchResultProps) {
   return (
     <li
-      className="cosuno-search-result col-sm-4 col-md-3"
-      id="cosuno-search-result"
+      className="company-search-search-result col-sm-4 col-md-3"
+      id="company-search-search-result"
       key={i}
     >
       <img
-        className="cosuno-search-result__image"
+        className="company-search-search-result__image"
         src={searchResult.logo}
         alt={searchResult.company_name}
       />
-      <h3 className="cosuno-search-result__title">
+      <h3 className="company-search-search-result__title">
         {searchResult.company_name}
       </h3>
-      <p className="cosuno-search-result__specialty">
+      <p className="company-search-search-result__specialty">
         <strong>Specialty: </strong>
         {searchResult.specialty}
       </p>
-      <p className="cosuno-search-result__city">
+      <p className="company-search-search-result__city">
         <strong>City: </strong>
         {searchResult.city}
       </p>

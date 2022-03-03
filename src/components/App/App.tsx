@@ -78,10 +78,10 @@ function App() {
   }, []);
 
   return (
-    <div className="cosuno-app">
+    <div className="company-search-app">
       <Header />
-      <div className="cosuno-content-wrapper container">
-        <div className="cosuno-search-field__wrapper">
+      <div className="company-search-content-wrapper container">
+        <div className="company-search-search-field__wrapper">
           <Input handleSearch={handleSearch} />
           {filters && (
             <Filters

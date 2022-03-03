@@ -1,6 +1,6 @@
 import React from "react";
 import "./Header.scss";
-import logo from "../../assets/cosuno-logo.svg";
+import logo from "../../assets/logo.svg";
 
 function Header() {
   return (

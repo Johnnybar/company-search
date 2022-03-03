@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/cosuno-search/static/css/main.47f1e98a.css",
-    "main.js": "/cosuno-search/static/js/main.c761b388.js",
-    "static/media/cosuno-logo.svg": "/cosuno-search/static/media/cosuno-logo.db7870faf22f9c6c32e43743c2481d8a.svg",
-    "index.html": "/cosuno-search/index.html",
-    "main.47f1e98a.css.map": "/cosuno-search/static/css/main.47f1e98a.css.map",
-    "main.c761b388.js.map": "/cosuno-search/static/js/main.c761b388.js.map"
+    "main.css": "/company-search/static/css/main.42909bd7.css",
+    "main.js": "/company-search/static/js/main.50bdc619.js",
+    "static/media/logo.svg": "/company-search/static/media/logo.3783c2159e5ebde6c8f4966d1ddb2f80.svg",
+    "index.html": "/company-search/index.html",
+    "main.42909bd7.css.map": "/company-search/static/css/main.42909bd7.css.map",
+    "main.50bdc619.js.map": "/company-search/static/js/main.50bdc619.js.map"
   },
   "entrypoints": [
-    "static/css/main.47f1e98a.css",
-    "static/js/main.c761b388.js"
+    "static/css/main.42909bd7.css",
+    "static/js/main.50bdc619.js"
   ]
 }
